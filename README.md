@@ -35,7 +35,7 @@ kubectl apply -f manifests/task1/storage-class.yaml
 kubectl apply -f manifests/task1/pv.yaml
 kubectl get pv
 ```
-![image](https://github.com/temagraf/7-StorageK8s-2/blob/main/1-1images%3A1-pv-status.png)
+![image](https://github.com/temagraf/7-StorageK8s-2/blob/main/1-1images_1-pv-status.png)
 
 ### 2 Создание PVC и проверка:
 
