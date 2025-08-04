@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-multitool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: storage-test
+  template:
+    metadata:
+      labels:
+        app: storage-test
+    spec:
+      nodeName: debian-final
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args:
+        - while true; do
+            echo "$(date) - Hello from busybox" >> /data/output.txt;
+            sleep 5;
+          done
+        volumeMounts:
+        - name: shared-data
+          mountPath: /data
+      - name: multitool
+        image: wbitt/network-multitool
+        volumeMounts:
+        - name: shared-data
+          mountPath: /data
+      volumes:
+      - name: shared-data
+        persistentVolumeClaim:
+          claimName: local-pvc
